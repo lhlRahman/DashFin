@@ -1,26 +1,22 @@
-'use client';
-
-import React, { ChangeEvent, useState, MouseEvent } from 'react';
+import React, { ChangeEvent, useState, SyntheticEvent, FormEvent } from "react";
 
 interface Props {
-    search: string | undefined;
-    handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
-    handleClick: (e: MouseEvent<HTMLButtonElement>) => void;
-    setSearch: (search: string) => void;
+  onClick: (e: SyntheticEvent) => void;
+  search: string | undefined;
+  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+const Search: React.FC<Props> = ({
+  onClick,
+  search,
+  handleChange,
+}: Props): JSX.Element => {
+  return (
+    <div>
+      <input value={search} onChange={(e) => handleChange(e)}></input>
+      <button className="border border-black" onClick={(e) => onClick(e)} />
+    </div>
+  );
 };
 
-const SearchBar: React.FC<Props> = ({ search, handleChange, handleClick, setSearch }: Props): JSX.Element => {
-
-    return (
-        <div>
-            <input
-                type="text"
-                value={search}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
-            />
-            <button onClick={(e: MouseEvent<HTMLButtonElement>) => handleClick(e)}>Search</button>
-        </div>
-    );
-};
-
-export default SearchBar;
+export default Search;
